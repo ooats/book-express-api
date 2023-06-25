@@ -8,7 +8,7 @@ import { prisma } from "../../../config/prisma";
 import { AuthorMap } from "../mappers/authorMap";
 
 export interface ICreateBookRepo extends  Repo<Book>   {
-      getBookByISBN(isbn:Isbn): Promise<Book>;
+      getBookByISBN(isbn:Isbn): Promise<Book|null>;
       getAllBooks(): Promise<Book[]>;
       deleteBook(isbn: Isbn): Promise<void>;
       updateBook(book: Book): Promise<void>;
@@ -59,7 +59,7 @@ export interface ICreateBookRepo extends  Repo<Book>   {
             isbn: bookUpdate.isbn,
           },
           data: {
-            booktitle: bookUpdate.booktitle,
+            booktitle: bookUpdate.bookTitle,
             author: bookUpdate.author
           },
         })
@@ -68,17 +68,18 @@ export interface ICreateBookRepo extends  Repo<Book>   {
       }
       
     }
-    async getBookByISBN(isbn: Isbn): Promise<Book> {
+    async getBookByISBN(isbn: Isbn): Promise<Book|null> {
       let isbnString = isbn.value
       let bookExists;
       try {
-        bookExists = await prisma.books.findUnique({
+        bookExists = await prisma.books.findUniqueOrThrow({
          where: {
            isbn : isbnString
          },
        })
      } catch (error) {
-       
+       console.log(error)
+       return null
      }
       return BookMap.toDomain(bookExists)
 
@@ -105,7 +106,8 @@ export interface ICreateBookRepo extends  Repo<Book>   {
           data: persistBook
         })
       } catch (error) {
-        
+        Promise.reject();
+        console.log(error)
       }
       console.log('persisting book',saveBook)
     }
