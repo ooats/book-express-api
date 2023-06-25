@@ -8,6 +8,7 @@ import { Book } from "../../domain/Book";
 import { GetBookByISBNDTO } from "./GetBookByIsbnDTO";
 import { GenericAppError } from "../../../../core/logic/AppError";
 import { GetBookByIsbnErrors } from "./GetBookByIsbnErrors";
+import { Prisma } from "@prisma/client";
 
 type Response = Either<
 GetBookByIsbnErrors.BookAlreadyExists 
@@ -18,7 +19,7 @@ GetBookByIsbnErrors.InvalidInputError,
 >;
 
 export class GetBookByIsbnUseCase
-  implements UseCase<GetBookByISBNDTO, Promise<Response>>
+  implements UseCase<string, Promise<Response>>
 {
   private bookRepo: BookRepo;
 
@@ -26,9 +27,9 @@ export class GetBookByIsbnUseCase
     this.bookRepo = bookRepo;
   }
   
-  async execute(req: GetBookByISBNDTO): Promise<Response> {
+  async execute(isbn: string): Promise<Response> {
 
-    const isbnorError = Isbn.create(req.isbn);
+    const isbnorError = Isbn.create(isbn);
     
     let isbnFailed = isbnorError.isFailure;
 
@@ -46,14 +47,17 @@ export class GetBookByIsbnUseCase
       let bookNotFound: boolean = book === null;
 
       if(bookNotFound){
-        return left(new GetBookByIsbnErrors.BookNotFound(isbnorError.errorValue().value)) as Response;
+        return left(new GetBookByIsbnErrors.BookNotFound(pureISBN.value)) as Response;
       }     
     } catch (error) {
+      // if(error instanceof Prisma.PrismaClientKnownRequestError){
+      //   return left(new GetBookByIsbnErrors.BookNotFound(pureISBN.value))
+      // }
       return left(new GenericAppError.UnexpectedError(error));
 
     }
 
-    return right(Result.ok<Book>( book)) as Response;
+    return right(Result.ok<Book>( book!)) as Response;
 
   }
  

@@ -15,11 +15,13 @@ export class GetBookByIsbnController extends BaseController {
     }
   
     async executeImpl(): Promise<any> {
-      const dto: GetBookByISBNDTO = this.req.body as GetBookByISBNDTO;
+      //const dto: GetBookByISBNDTO = this.req.body as GetBookByISBNDTO;
+      let dto = this.req.params ;
+
       
       try {
-        const result = await this.useCase.execute(dto);
-  
+        const result = await this.useCase.execute(dto.isbn);
+
         if (result.isLeft()) {
           const error = result.value;
           switch (error.constructor) {
