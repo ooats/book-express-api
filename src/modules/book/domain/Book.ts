@@ -17,9 +17,7 @@ author: Author
 
 
 export class Book extends AggregateRoot<BookProps> {
-// get merchantId(): MerchantId {
-//   return MerchantId.create(this._id).getValue();
-// }
+
 
 get isbn(): Isbn {
   return this.props.isbn;
