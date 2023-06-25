@@ -16,7 +16,12 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors());
+app.use(cors({  
+  allowedHeaders: [ "Origin", "X-Requested-With",    
+  "Content-Type", "Accept", "X-Access-Token", "Authorization",    ], 
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",   
+  preflightContinue: true,   
+  origin: "*",  }));
 app.use(express.json());
 
 const options = {

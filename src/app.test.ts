@@ -15,3 +15,28 @@ describe('GET /', () => {
       }, done);
   });
 });
+
+
+describe('POST / create book', () => {
+  let payload = {isbn: "1-56619-909-3",bookTitle:"Harry Potter",author:"harry potter"}
+  it('responds with a json message', (done) => {
+    request(app)
+      .post('/books/create')
+      .send(payload)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(201, "Created", done);
+  });
+});
+
+describe('GET / get book by id', () => {
+  it('responds with a json message', (done) => {
+    request(app)
+      .get('/books/')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, {
+        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+      }, done);
+  });
+});
