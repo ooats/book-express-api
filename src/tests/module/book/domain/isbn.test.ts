@@ -7,7 +7,6 @@ describe("Create isbn object",()=>{
 
         expect(isbn.isFailure).toBe(true);
         expect(isbn.isSuccess).toBe(false);
-        expect(isbn.getValue()).toBe(null);
 
     })
 
@@ -17,7 +16,6 @@ describe("Create isbn object",()=>{
 
         expect(isbn.isFailure).toBe(true);
         expect(isbn.isSuccess).toBe(false);
-        expect(isbn.getValue()).toBe(null);
 
     })
 

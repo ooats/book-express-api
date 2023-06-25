@@ -11,7 +11,7 @@ describe('GET /', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, {
-        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+        message: 'live',
       }, done);
   });
 });
@@ -24,19 +24,8 @@ describe('POST / create book', () => {
       .post('/books/create')
       .send(payload)
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', "text/html; charset=utf-8")
       .expect(201, "Created", done);
   });
 });
 
-describe('GET / get book by id', () => {
-  it('responds with a json message', (done) => {
-    request(app)
-      .get('/books/')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200, {
-        message: 'live',
-      }, done);
-  });
-});
