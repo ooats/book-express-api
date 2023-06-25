@@ -36,7 +36,7 @@ describe('GET / get book by id', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, {
-        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+        message: 'live',
       }, done);
   });
 });

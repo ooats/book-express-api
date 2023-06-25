@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     console.log(error)
   }
   res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+    message: 'live',
 
   });
 });
