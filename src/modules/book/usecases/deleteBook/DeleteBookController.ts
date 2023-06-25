@@ -14,10 +14,12 @@ export class DeleteBookController extends BaseController {
     }
   
     async executeImpl(): Promise<any> {
-      const dto: DeleteBookDTO = this.req.body as DeleteBookDTO;
+      let dto = this.req.params ;
+
+      // const dto: DeleteBookDTO = this.req.body as DeleteBookDTO;
       
       try {
-        const result = await this.useCase.execute(dto);
+        const result = await this.useCase.execute(dto.isbn);
   
         if (result.isLeft()) {
           const error = result.value;

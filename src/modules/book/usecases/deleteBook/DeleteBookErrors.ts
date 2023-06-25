@@ -29,20 +29,12 @@ export namespace DeleteBookErrors {
     }
   }
 
-  
-
-
   export class BookNotFound extends Result<UseCaseError> {
     constructor(isbn: string) {
       super(false, {
-        message: `A book with the supplied account, ${isbn} was not found.`,
+        message: `A book with the supplied account, ${isbn} does not exist.`,
       } as UseCaseError);
     }
   }
-
-
-
-
-
 
 }

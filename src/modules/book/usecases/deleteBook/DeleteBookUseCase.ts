@@ -18,7 +18,7 @@ DeleteBookErrors.InvalidInputError,
 >;
 
 export class DeleteBookUseCase
-  implements UseCase<DeleteBookDTO, Promise<Response>>
+  implements UseCase<string, Promise<Response>>
 {
   private bookRepo: BookRepo;
 
@@ -26,9 +26,9 @@ export class DeleteBookUseCase
     this.bookRepo = bookRepo;
   }
   
-  async execute(req: DeleteBookDTO): Promise<Response> {
+  async execute(isbn: string): Promise<Response> {
 
-    const isbnorError = Isbn.create(req.isbn);
+    const isbnorError = Isbn.create(isbn);
 
 
     if (isbnorError.isFailure) {
@@ -44,7 +44,7 @@ export class DeleteBookUseCase
       let bookNotFound = bookExists == null
   
       if(bookNotFound){
-        return left(new DeleteBookErrors.BookNotFound(req.isbn)) as Response;
+        return left(new DeleteBookErrors.BookNotFound(isbn)) as Response;
       }
 
       const deleteBook = await this.bookRepo.deleteBook(validISBN);
