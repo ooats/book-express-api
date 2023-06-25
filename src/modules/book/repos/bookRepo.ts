@@ -6,6 +6,7 @@ import { IsbnMap } from "../mappers/isbnMap";
 import { prisma } from "../../../config/prisma";
  import { BookTitleMap } from "../mappers/bookTitleMap";
 import { AuthorMap } from "../mappers/authorMap";
+import { Prisma } from "@prisma/client";
 
 export interface ICreateBookRepo extends  Repo<Book>   {
       getBookByISBN(isbn:Isbn): Promise<Book|null>;
@@ -78,6 +79,7 @@ export interface ICreateBookRepo extends  Repo<Book>   {
          },
        })
      } catch (error) {
+     
        console.log(error)
        return null
      }
