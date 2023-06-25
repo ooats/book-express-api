@@ -1,5 +1,6 @@
 import { BaseController } from "../../../../core/infra/BaseController";
 import { createBookDTO } from "../../dtos/models";
+import { UpdateBookDTO } from "./UpdateBookDTO";
 import {  UpdateBookErrors } from "./UpdateBookErrors";
 import {  UpdateBookUseCase } from "./UpdateBookUseCase";
 
@@ -13,7 +14,7 @@ export class UpdateBookController extends BaseController {
     }
   
     async executeImpl(): Promise<any> {
-      const dto: createBookDTO = this.req.body as createBookDTO;
+      const dto: createBookDTO = this.req.body as UpdateBookDTO;
       
       try {
         const result = await this.useCase.execute(dto);

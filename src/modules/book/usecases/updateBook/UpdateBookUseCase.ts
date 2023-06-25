@@ -55,7 +55,7 @@ export class UpdateBookUseCase
         return left(new DeleteBookErrors.BookNotFound(req.isbn)) as Response;
       }
 
-       await this.bookRepo.updateBook(bookExists);
+       await this.bookRepo.updateBook(bookExists!);
 
     } catch (error) {
       return left(new GenericAppError.UnexpectedError(error));
