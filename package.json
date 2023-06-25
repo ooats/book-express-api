@@ -4,7 +4,6 @@
   "description": " A basic starter for an express.js API with Typescript",
   "main": "src/index.ts",
   "scripts": {
-    "generate": "drizzle-kit generate:mysql",
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
