@@ -12,14 +12,14 @@ export class BookMap extends Mapper<Book> {
       const bookorError = Book.create(
         {
           isbn: IsbnMap.toDomain(raw.isbn),
-          bookTitle: BookTitleMap.toDomain(raw.bookTitle) ,
+          bookTitle: BookTitleMap.toDomain(raw.booktitle) ,
           author:  AuthorMap.toDomain(raw.author) ,          
         }
       );
   
       bookorError.isFailure ? console.log(bookorError.error) : "";
   
-      return bookorError.isSuccess == true
+      return bookorError.isSuccess
         ? bookorError.getValue()
         : bookorError.errorValue();
     }
@@ -28,7 +28,7 @@ export class BookMap extends Mapper<Book> {
      
       return {
         isbn: book.isbn.value,
-        bookTitle: book.bookTitle.value,
+        booktitle: book.bookTitle.value,
         author: book.author.value, 
         
       };
