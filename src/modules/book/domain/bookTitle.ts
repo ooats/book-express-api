@@ -18,7 +18,7 @@ interface bookTitleProps {
         let bookTitleisNull = !!bookTitle === false || bookTitle.length === 0;
         
         if (bookTitleisNull) {
-        return Result.fail<BookTitle>("Must Provide Valid ISBN");
+        return Result.fail<BookTitle>("Must Provide Book Title");
       } else {
         return Result.ok<BookTitle>(new BookTitle({ value: bookTitle }));
       }
