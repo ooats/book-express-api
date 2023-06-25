@@ -17,8 +17,9 @@ export class IsbnMap extends Mapper<Isbn> {
         ? isbnOrError.getValue()
         : isbnOrError.errorValue();
     }
+    // public static toPersistence()
 
-    
+        
   
     
   }
