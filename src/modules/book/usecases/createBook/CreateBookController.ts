@@ -35,7 +35,7 @@ export class CreateBookController extends BaseController {
           }
         } else {
   
-          return this.ok(this.res);
+          return this.created(this.res);
         }
       } catch (err: any) {
         return this.fail(err);
