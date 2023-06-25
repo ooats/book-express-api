@@ -26,8 +26,8 @@ export interface ICreateBookRepo extends  Repo<Book>   {
       // } catch (error) {
       //   Promise.reject();
       // }
-      // allBooks?.map(bookItem=>{
-      //   let bookProps = {
+      // allBooks?.map(bookItem:any=>{
+      //   let bookProps:BookProps = {
       //     isbn:IsbnMap.toDomain(bookItem.isbn),
       //     bookTitle:BookTitleMap.toDomain(bookItem.booktitle),
       //     author:AuthorMap.toDomain(bookItem.author)
