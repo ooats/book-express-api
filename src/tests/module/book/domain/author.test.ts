@@ -15,6 +15,7 @@ describe("Create valid author title",()=>{
         expect(author.isFailure).toBe(false)
         expect(author.isSuccess).toBe(true);
         expect(author.getValue()).toBeInstanceOf( Author);
+        expect(author.getValue().value).toBe("john doe")
 
     })
 })

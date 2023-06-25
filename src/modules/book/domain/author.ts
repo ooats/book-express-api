@@ -14,13 +14,13 @@ interface authorProps {
       super(props);
     }
   
-    public static create(bookTitle: string): Result<Author> {
-        let authorisNull = !!bookTitle === false || bookTitle.length === 0;
+    public static create(author: string): Result<Author> {
+        let authorisNull = !!author === false || author.length === 0;
         
         if (authorisNull) {
-        return Result.fail<Author>("Must Provide Valid ISBN");
+        return Result.fail<Author>("Must Provide Valid Author");
       } else {
-        return Result.ok<Author>(new Author({ value: bookTitle }));
+        return Result.ok<Author>(new Author({ value: author }));
       }
     }
   }
