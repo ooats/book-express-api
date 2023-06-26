@@ -8,10 +8,8 @@ A CRUD rest api that uses Domain Driven Design and Clean Architecture. Swagger d
 npm install
 ```
 ## Setup table schema
-SQL for the the table is book.sql located in the root directory. Postgres database was used for development.
+book.sql located in the root directory was used for the table schema. Postgres database was used for development.
 
-## Setup table schema
-SQL for the the table is book.sql located in the root directory. Postgres database was used for development.
 
 ## Setup prisma
 Generate prisma schema 
