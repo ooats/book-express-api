@@ -1,4 +1,3 @@
-
 import { BookRepo, ICreateBookRepo } from "../../repos/bookRepo";
 import { createBookDTO } from "../../dtos/models";
 import { Isbn } from "../../domain/Isbn";
@@ -11,10 +10,10 @@ import { BookTitle } from "../../domain/bookTitle";
 import { Author } from "../../domain/author";
 
 type Response = Either<
-CreateBookErrors.BookAlreadyExists 
-|CreateBookErrors.BookNotFound
-|CreateBookErrors.BookTitleMissing
-|CreateBookErrors.InvalidInputError,
+  | CreateBookErrors.BookAlreadyExists
+  | CreateBookErrors.BookNotFound
+  | CreateBookErrors.BookTitleMissing
+  | CreateBookErrors.InvalidInputError,
   Result<Book>
 >;
 
@@ -26,23 +25,28 @@ export class CreateBookUseCase
   constructor(bookRepo: BookRepo) {
     this.bookRepo = bookRepo;
   }
-  
-  async execute(req: createBookDTO): Promise<Response> {
 
+  async execute(req: createBookDTO): Promise<Response> {
     const isbnorError = Isbn.create(req.isbn);
     const bookTitleorError = BookTitle.create(req.bookTitle);
     const authororError = Author.create(req.author);
 
-    const combinedPropsResult = Result.combine([isbnorError, bookTitleorError, authororError]);
+    const combinedPropsResult = Result.combine([
+      isbnorError,
+      bookTitleorError,
+      authororError,
+    ]);
 
     if (combinedPropsResult.isFailure) {
-      return left(new CreateBookErrors.InvalidInputError(combinedPropsResult.error)) as Response;
+      return left(
+        new CreateBookErrors.InvalidInputError(combinedPropsResult.error)
+      ) as Response;
     }
     const bookProps: BookProps = {
       isbn: isbnorError.getValue(),
       bookTitle: bookTitleorError.getValue(),
-      author: authororError.getValue()
-    }
+      author: authororError.getValue(),
+    };
     const bookorError = Book.create(bookProps);
 
     if (bookorError.isFailure) {
@@ -52,24 +56,22 @@ export class CreateBookUseCase
     const validISBN = isbnorError.getValue().value;
 
     try {
-      const confirmBookExists : boolean = await this.bookRepo.exists(
+      const confirmBookExists: boolean = await this.bookRepo.exists(
         bookorError.getValue()
       );
-      
+
       const bookExists = confirmBookExists === true;
 
-      if(bookExists){
-        return left(new CreateBookErrors.BookAlreadyExists(req.isbn)) as Response;
+      if (bookExists) {
+        return left(
+          new CreateBookErrors.BookAlreadyExists(req.isbn)
+        ) as Response;
       }
 
-      const saveBook  = await this.bookRepo.save(bookorError.getValue())
-
+      const saveBook = await this.bookRepo.save(bookorError.getValue());
     } catch (error) {
       return left(new GenericAppError.UnexpectedError(error));
-
     }
     return right(Result.ok<Book>()) as Response;
-
   }
- 
 }

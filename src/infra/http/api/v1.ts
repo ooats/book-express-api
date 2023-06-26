@@ -5,5 +5,4 @@ const v1Router = express.Router();
 
 v1Router.use("/book", booksRouter);
 
-
 export { v1Router };

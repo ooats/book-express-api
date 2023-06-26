@@ -1,3 +1,3 @@
 export interface DeleteBookDTO {
-    isbn: string;
-  }
+  isbn: string;
+}

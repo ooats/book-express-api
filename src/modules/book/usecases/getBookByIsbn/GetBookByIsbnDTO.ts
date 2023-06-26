@@ -1,4 +1,3 @@
 export interface GetBookByISBNDTO {
-    isbn: string;
-  }
-  
+  isbn: string;
+}

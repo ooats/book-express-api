@@ -18,9 +18,6 @@ export namespace DeleteBookErrors {
     }
   }
 
- 
-
-
   export class BookTitleMissing extends Result<UseCaseError> {
     constructor() {
       super(false, {
@@ -36,5 +33,4 @@ export namespace DeleteBookErrors {
       } as UseCaseError);
     }
   }
-
 }

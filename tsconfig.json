@@ -12,9 +12,5 @@
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
-  "include": [
-    "./*.js",
-    "src/**/*.ts",
-    "test/**/*.ts",
-  ],
+  "include": ["./*.js", "src/**/*.ts", "test/**/*.ts"]
 }

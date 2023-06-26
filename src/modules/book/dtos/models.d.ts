@@ -1,14 +1,12 @@
-export interface bookDTO{
-    isbn: string;
-    bookTitle : string;
-    author: string;
-  
-  }
+export interface bookDTO {
+  isbn: string;
+  bookTitle: string;
+  author: string;
+}
 export type booksDTO = bookDTO[];
 
-
-export interface createBookDTO{
+export interface createBookDTO {
   isbn: string;
-  bookTitle : string;
+  bookTitle: string;
   author: string;
 }

@@ -18,9 +18,6 @@ export namespace GetBookByIsbnErrors {
     }
   }
 
- 
-
-
   export class BookTitleMissing extends Result<UseCaseError> {
     constructor() {
       super(false, {
@@ -29,9 +26,6 @@ export namespace GetBookByIsbnErrors {
     }
   }
 
-  
-
-
   export class BookNotFound extends Result<UseCaseError> {
     constructor(isbn: string) {
       super(false, {
@@ -39,10 +33,4 @@ export namespace GetBookByIsbnErrors {
       } as UseCaseError);
     }
   }
-
-
-
-
-
-
 }

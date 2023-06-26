@@ -1,3 +1,1 @@
-
-global.afterAll(async () => {
-});
+global.afterAll(async () => {});

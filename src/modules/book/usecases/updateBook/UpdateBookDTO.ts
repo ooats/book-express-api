@@ -1,5 +1,5 @@
 export interface UpdateBookDTO {
-    isbn: string;
-    bookTitle: string;
-    author:string;
-  }
+  isbn: string;
+  bookTitle: string;
+  author: string;
+}
